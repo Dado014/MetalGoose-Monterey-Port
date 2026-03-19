@@ -21,7 +21,7 @@ class NonActivatingWindow: NSWindow {
     override var canBecomeMain: Bool { false }
 }
 
-@available(macOS 26.0, *)
+@available(macOS 12.3, *)
 @MainActor
 final class OverlayWindowManager: ObservableObject {
     @Published private(set) var isActive: Bool = false
@@ -260,7 +260,7 @@ final class OverlayWindowManager: ObservableObject {
     }
 }
 
-@available(macOS 26.0, *)
+@available(macOS 12.3, *)
 extension OverlayWindowManager {
     func createTexture(
         width: Int, height: Int,
@@ -288,7 +288,7 @@ extension OverlayWindowManager {
     }
 }
 
-@available(macOS 26.0, *)
+@available(macOS 12.3, *)
 class MouseConstraintManager {
     static let shared = MouseConstraintManager()
     

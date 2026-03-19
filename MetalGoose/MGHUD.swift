@@ -1,7 +1,7 @@
 import SwiftUI
 import AppKit
 
-@available(macOS 26.0, *)
+@available(macOS 12.3, *)
 @MainActor
 final class MGHUDData: ObservableObject {
     @Published var deviceName: String = "Unknown GPU"
@@ -73,7 +73,7 @@ final class MGHUDData: ObservableObject {
     }
 }
 
-@available(macOS 26.0, *)
+@available(macOS 12.3, *)
 struct MGHUDView: View {
     @ObservedObject var data: MGHUDData
     let isCompact: Bool
@@ -209,7 +209,7 @@ struct MGHUDView: View {
     }
 }
 
-@available(macOS 26.0, *)
+@available(macOS 12.3, *)
 struct HUDRow: View {
     let label: String
     let value: String
@@ -229,7 +229,7 @@ struct HUDRow: View {
     }
 }
 
-@available(macOS 26.0, *)
+@available(macOS 12.3, *)
 class MGHUDOverlayView: NSView {
     private var hostingView: NSHostingView<MGHUDView>?
     private let hudData = MGHUDData()
@@ -321,7 +321,7 @@ class MGHUDOverlayView: NSView {
     }
 }
 
-@available(macOS 26.0, *)
+@available(macOS 12.3, *)
 @MainActor
 final class MGHUDWindowController {
     private var hudWindow: NSWindow?

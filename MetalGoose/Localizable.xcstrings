@@ -200,7 +200,7 @@
         }
       }
     },
-    "MetalFX + CAS" : {
+    "Bilinear + CAS" : {
       "comment" : "Help text: MetalFX + CAS"
     },
     "MetalGoose" : {
@@ -213,17 +213,17 @@
         }
       }
     },
-    "MetalGoose requires macOS 26.0 or newer" : {
+    "MetalGoose requires macOS 12.3 or newer" : {
       "localizations" : {
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A MetalGoose futtatásához macOS 26.0 vagy újabb rendszer szükséges"
+            "value" : "A MetalGoose futtatásához macOS 12.3 o újabb sistema è richiesto"
           }
         }
       }
     },
-    "MetalGoose Upscaler - MetalFX Spatial + CAS" : {
+    "MetalGoose Upscaler - Bilinear + CAS" : {
       "comment" : "Description text"
     },
     "Method" : {

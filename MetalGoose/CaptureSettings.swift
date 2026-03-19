@@ -1,6 +1,6 @@
 import SwiftUI
 
-@available(macOS 26.0, *)
+@available(macOS 12.3, *)
 final class CaptureSettings: ObservableObject {
     static let shared = CaptureSettings()
     
@@ -46,7 +46,7 @@ final class CaptureSettings: ObservableObject {
         var description: String {
             switch self {
             case .off: return "No upscaling - original resolution passthrough"
-            case .mgup1: return "MetalGoose Upscaler - MetalFX Spatial + CAS"
+            case .mgup1: return "MetalGoose Upscaler - Bilinear + CAS"
             }
         }
     }
@@ -398,7 +398,7 @@ struct QualityProfile {
     let frameGenGradientThreshold: Float
 }
 
-@available(macOS 26.0, *)
+@available(macOS 12.3, *)
 extension CaptureSettings.QualityMode {
     var profile: QualityProfile {
         switch self {

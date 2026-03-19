@@ -2,7 +2,7 @@ import Foundation
 import AppKit
 @preconcurrency import Metal
 @preconcurrency import MetalKit
-@preconcurrency import MetalFX
+// MetalFX non supportato su Monterey
 import IOSurface
 import QuartzCore
 import os
@@ -27,7 +27,7 @@ struct PipelineStats: @unchecked Sendable {
     var outputResolution: CGSize = .zero
 }
 
-@available(macOS 26.0, *)
+@available(macOS 12.3, *)
 final class GooseEngine: NSObject, ObservableObject, MTKViewDelegate, @unchecked Sendable {
     
     // MARK: - Thread-safe published state
@@ -60,10 +60,7 @@ final class GooseEngine: NSObject, ObservableObject, MTKViewDelegate, @unchecked
     private let device: MTLDevice
     private let commandQueue: MTLCommandQueue
     
-    // MetalFX Spatial Scaler
-    private var spatialScaler: MTLFXSpatialScaler?
-    private var spatialScalerInputSize: (width: Int, height: Int) = (0, 0)
-    private var spatialScalerOutputSize: (width: Int, height: Int) = (0, 0)
+    // MetalFX non supportato su Monterey
     
     // Retained pipelines
     private var scalePipeline: MTLComputePipelineState?
@@ -264,36 +261,7 @@ final class GooseEngine: NSObject, ObservableObject, MTKViewDelegate, @unchecked
         
     }
     
-    private func ensureMetalFXSpatialScaler(inputWidth: Int, inputHeight: Int,
-                                            outputWidth: Int, outputHeight: Int) -> MTLFXSpatialScaler? {
-        // Reuse existing scaler if dimensions match
-        if let scaler = spatialScaler,
-           spatialScalerInputSize == (inputWidth, inputHeight),
-           spatialScalerOutputSize == (outputWidth, outputHeight) {
-            return scaler
-        }
-        
-        // Create new scaler
-        let descriptor = MTLFXSpatialScalerDescriptor()
-        descriptor.inputWidth = inputWidth
-        descriptor.inputHeight = inputHeight
-        descriptor.outputWidth = outputWidth
-        descriptor.outputHeight = outputHeight
-        descriptor.colorTextureFormat = .bgra8Unorm
-        descriptor.outputTextureFormat = .bgra8Unorm
-        descriptor.colorProcessingMode = .perceptual
-        
-        guard let scaler = descriptor.makeSpatialScaler(device: device) else {
-            lastError = "Error Code: MG-ENG-004 MetalFX Spatial Scaler creation failed"
-            return nil
-        }
-        
-        spatialScaler = scaler
-        spatialScalerInputSize = (inputWidth, inputHeight)
-        spatialScalerOutputSize = (outputWidth, outputHeight)
-        
-        return scaler
-    }
+    // MetalFX non supportato su Monterey
 
     private func ensureTexture(_ texture: inout MTLTexture?, width: Int, height: Int,
                                pixelFormat: MTLPixelFormat = .bgra8Unorm,
@@ -922,18 +890,18 @@ final class GooseEngine: NSObject, ObservableObject, MTKViewDelegate, @unchecked
 
             switch scalingType {
             case .mgup1:
-                // MGUP-1: MetalFX Spatial Scaler + quality-based CAS sharpening
-                guard let scaler = ensureMetalFXSpatialScaler(
-                    inputWidth: workingTex.width, inputHeight: workingTex.height,
-                    outputWidth: targetWidth, outputHeight: targetHeight
-                ) else {
-                    lastError = "Error Code: MG-ENG-004 MetalFX Spatial Scaler creation failed"
+                // Porting: Uso di bilinear scaling invece di MetalFX Spatial Scaler
+                guard let scalePipeline = scalePipeline,
+                      let encoder = commandBuffer.makeComputeCommandEncoder() else {
+                    lastError = "Error Code: MG-ENG-008 Scale pipeline unavailable"
                     commandBuffer.commit()
                     return
                 }
-                scaler.colorTexture = workingTex
-                scaler.outputTexture = outputTex
-                scaler.encode(commandBuffer: commandBuffer)
+                encoder.setComputePipelineState(scalePipeline)
+                encoder.setTexture(workingTex, index: 0)
+                encoder.setTexture(outputTex, index: 1)
+                dispatchThreads(pipeline: scalePipeline, encoder: encoder, width: targetWidth, height: targetHeight)
+                encoder.endEncoding()
                 scaledTex = outputTex
 
                 // Apply CAS sharpening based on quality mode

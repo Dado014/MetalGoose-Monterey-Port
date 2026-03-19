@@ -91,25 +91,25 @@ kernel void flowInit(
     int2 bestOffset = int2(0, 0);
     
     // 3x3 SAD error function for a given offset
-    auto computeSAD = [&](int2 offset) -> half {
-        half err = 0.0h;
-        for (int py = -1; py <= 1; py++) {
-            for (int px = -1; px <= 1; px++) {
-                int2 p = int2(gid) + int2(px, py);
-                p.x = clamp(p.x, 0, int(width) - 1);
-                p.y = clamp(p.y, 0, int(height) - 1);
-                int2 q = int2(gid) + offset + int2(px, py);
-                q.x = clamp(q.x, 0, int(width) - 1);
-                q.y = clamp(q.y, 0, int(height) - 1);
-                err += abs(prevLuma.read(uint2(p)).r - nextLuma.read(uint2(q)).r);
-            }
-        }
-        return err;
-    };
+    #define COMPUTE_SAD(offset) ({ \
+        half err = 0.0h; \
+        for (int py = -1; py <= 1; py++) { \
+            for (int px = -1; px <= 1; px++) { \
+                int2 p = int2(gid) + int2(px, py); \
+                p.x = clamp(p.x, 0, int(width) - 1); \
+                p.y = clamp(p.y, 0, int(height) - 1); \
+                int2 q = int2(gid) + (offset) + int2(px, py); \
+                q.x = clamp(q.x, 0, int(width) - 1); \
+                q.y = clamp(q.y, 0, int(height) - 1); \
+                err += abs(prevLuma.read(uint2(p)).r - nextLuma.read(uint2(q)).r); \
+            } \
+        } \
+        err; \
+    })
     
     for (int dy = -radius; dy <= radius; dy++) {
         for (int dx = -radius; dx <= radius; dx++) {
-            half err = computeSAD(int2(dx, dy));
+            half err = COMPUTE_SAD(int2(dx, dy));
             if (err < bestError) {
                 bestError = err;
                 bestOffset = int2(dx, dy);
@@ -121,8 +121,8 @@ kernel void flowInit(
     half2 subPixel = half2(bestOffset);
     
     // X-axis parabolic fit
-    half eL = computeSAD(bestOffset + int2(-1, 0));
-    half eR = computeSAD(bestOffset + int2(1, 0));
+    half eL = COMPUTE_SAD(bestOffset + int2(-1, 0));
+    half eR = COMPUTE_SAD(bestOffset + int2(1, 0));
     half denomX = eL + eR - 2.0h * bestError;
     if (abs(denomX) > 1e-6h) {
         half dx = 0.5h * (eL - eR) / denomX;
@@ -130,8 +130,8 @@ kernel void flowInit(
     }
     
     // Y-axis parabolic fit
-    half eU = computeSAD(bestOffset + int2(0, -1));
-    half eD = computeSAD(bestOffset + int2(0, 1));
+    half eU = COMPUTE_SAD(bestOffset + int2(0, -1));
+    half eD = COMPUTE_SAD(bestOffset + int2(0, 1));
     half denomY = eU + eD - 2.0h * bestError;
     if (abs(denomY) > 1e-6h) {
         half dy = 0.5h * (eU - eD) / denomY;
@@ -173,26 +173,26 @@ kernel void flowRefine(
     int2 bestOffset = predInt;
     
     // 3x3 SAD error function
-    auto computeSAD = [&](int2 offset) -> half {
-        half err = 0.0h;
-        for (int py = -1; py <= 1; py++) {
-            for (int px = -1; px <= 1; px++) {
-                int2 p = int2(gid) + int2(px, py);
-                p.x = clamp(p.x, 0, int(width) - 1);
-                p.y = clamp(p.y, 0, int(height) - 1);
-                int2 q = int2(gid) + offset + int2(px, py);
-                q.x = clamp(q.x, 0, int(width) - 1);
-                q.y = clamp(q.y, 0, int(height) - 1);
-                err += abs(prevLuma.read(uint2(p)).r - nextLuma.read(uint2(q)).r);
-            }
-        }
-        return err;
-    };
+    #define COMPUTE_SAD_REFINE(offset) ({ \
+        half err = 0.0h; \
+        for (int py = -1; py <= 1; py++) { \
+            for (int px = -1; px <= 1; px++) { \
+                int2 p = int2(gid) + int2(px, py); \
+                p.x = clamp(p.x, 0, int(width) - 1); \
+                p.y = clamp(p.y, 0, int(height) - 1); \
+                int2 q = int2(gid) + (offset) + int2(px, py); \
+                q.x = clamp(q.x, 0, int(width) - 1); \
+                q.y = clamp(q.y, 0, int(height) - 1); \
+                err += abs(prevLuma.read(uint2(p)).r - nextLuma.read(uint2(q)).r); \
+            } \
+        } \
+        err; \
+    })
     
     for (int dy = -radius; dy <= radius; dy++) {
         for (int dx = -radius; dx <= radius; dx++) {
             int2 offset = predInt + int2(dx, dy);
-            half err = computeSAD(offset);
+            half err = COMPUTE_SAD_REFINE(offset);
             if (err < bestError) {
                 bestError = err;
                 bestOffset = offset;
@@ -204,8 +204,8 @@ kernel void flowRefine(
     half2 subPixel = half2(bestOffset);
     
     // X-axis parabolic fit
-    half eL = computeSAD(bestOffset + int2(-1, 0));
-    half eR = computeSAD(bestOffset + int2(1, 0));
+    half eL = COMPUTE_SAD_REFINE(bestOffset + int2(-1, 0));
+    half eR = COMPUTE_SAD_REFINE(bestOffset + int2(1, 0));
     half denomX = eL + eR - 2.0h * bestError;
     if (abs(denomX) > 1e-6h) {
         half dx = 0.5h * (eL - eR) / denomX;
@@ -213,8 +213,8 @@ kernel void flowRefine(
     }
     
     // Y-axis parabolic fit
-    half eU = computeSAD(bestOffset + int2(0, -1));
-    half eD = computeSAD(bestOffset + int2(0, 1));
+    half eU = COMPUTE_SAD_REFINE(bestOffset + int2(0, -1));
+    half eD = COMPUTE_SAD_REFINE(bestOffset + int2(0, 1));
     half denomY = eU + eD - 2.0h * bestError;
     if (abs(denomY) > 1e-6h) {
         half dy = 0.5h * (eU - eD) / denomY;

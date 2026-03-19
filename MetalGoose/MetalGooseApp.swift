@@ -4,10 +4,10 @@ struct MetalGooseApp: App {
     init() {}
     var body: some Scene {
         WindowGroup {
-            if #available(macOS 26.0, *) {
+            if #available(macOS 12.3, *) {
                 ContentView()
             } else {
-                Text("MetalGoose requires macOS 26.0 or newer")
+                Text("MetalGoose requires macOS 12.3 or newer")
                     .padding()
             }
         }

@@ -5,7 +5,7 @@ import CoreMedia
 import IOSurface
 import os
 
-@available(macOS 26.0, *)
+@available(macOS 12.3, *)
 final class WindowCaptureManager: NSObject, ObservableObject, SCStreamDelegate, SCStreamOutput, @unchecked Sendable {
     
     private let captureQueue = DispatchQueue(label: "com.metalgoose.capture", qos: .userInteractive)

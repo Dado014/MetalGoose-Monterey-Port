@@ -2,7 +2,7 @@ import SwiftUI
 import MetalKit
 import ApplicationServices
 
-@available(macOS 26.0, *)
+@available(macOS 12.3, *)
 struct ContentView: View {
 
     @StateObject var settings = CaptureSettings.shared
@@ -361,9 +361,9 @@ struct ContentView: View {
                 ConfigPanel(title: String(localized: "MGUP-1 Settings", comment: "Panel title: MGUP-1 settings")) {
                     PickerRow(label: String(localized: "Quality", comment: "Label: Quality"),
                               selection: $settings.qualityMode,
-                              helpText: String(localized: "MetalFX + CAS", comment: "Help text: MetalFX + CAS"))
+                              helpText: String(localized: "Bilinear + CAS", comment: "Help text: Bilinear + CAS"))
 
-                    Text(String(localized: "MetalGoose Upscaler - MetalFX Spatial + CAS", comment: "Description text"))
+                    Text(String(localized: "MetalGoose Upscaler - Bilinear + CAS", comment: "Description text"))
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
