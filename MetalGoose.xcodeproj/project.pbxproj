@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXFileReference section */
@@ -78,10 +78,10 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1640;
-				LastUpgradeCheck = 2610;
+				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					19FDA0B92ED66F9100F64E76 = {
-						CreatedOnToolsVersion = 16.4;
+						CreatedOnToolsVersion = 13.0;
 					};
 				};
 			};
@@ -95,7 +95,7 @@
 			);
 			mainGroup = 19FDA0B12ED66F9100F64E76;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
+			preferredProjectObjectVersion = 55;
 			productRefGroup = 19FDA0BB2ED66F9100F64E76 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
