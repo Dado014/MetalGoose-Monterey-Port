@@ -6,17 +6,34 @@
 	objectVersion = 55;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		19FDA0012ED66F9100F64E76 /* CaptureSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDA1012ED66F9100F64E76 /* CaptureSettings.swift */; };
+		19FDA0022ED66F9100F64E76 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDA1022ED66F9100F64E76 /* ContentView.swift */; };
+		19FDA0032ED66F9100F64E76 /* GooseEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDA1032ED66F9100F64E76 /* GooseEngine.swift */; };
+		19FDA0042ED66F9100F64E76 /* MGHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDA1042ED66F9100F64E76 /* MGHUD.swift */; };
+		19FDA0052ED66F9100F64E76 /* MetalGooseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDA1052ED66F9100F64E76 /* MetalGooseApp.swift */; };
+		19FDA0062ED66F9100F64E76 /* OverlayWindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDA1062ED66F9100F64E76 /* OverlayWindowManager.swift */; };
+		19FDA0072ED66F9100F64E76 /* WindowCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDA1072ED66F9100F64E76 /* WindowCaptureManager.swift */; };
+		19FDA0082ED66F9100F64E76 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 19FDA1082ED66F9100F64E76 /* Shaders.metal */; };
+		19FDA0092ED66F9100F64E76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19FDA1092ED66F9100F64E76 /* Assets.xcassets */; };
+		19FDA00A2ED66F9100F64E76 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 19FDA10A2ED66F9100F64E76 /* Localizable.xcstrings */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		19FDA0BA2ED66F9100F64E76 /* MetalGoose.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalGoose.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		19FDA1012ED66F9100F64E76 /* CaptureSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSettings.swift; sourceTree = "<group>"; };
+		19FDA1022ED66F9100F64E76 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		19FDA1032ED66F9100F64E76 /* GooseEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooseEngine.swift; sourceTree = "<group>"; };
+		19FDA1042ED66F9100F64E76 /* MGHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGHUD.swift; sourceTree = "<group>"; };
+		19FDA1052ED66F9100F64E76 /* MetalGooseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalGooseApp.swift; sourceTree = "<group>"; };
+		19FDA1062ED66F9100F64E76 /* OverlayWindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayWindowManager.swift; sourceTree = "<group>"; };
+		19FDA1072ED66F9100F64E76 /* WindowCaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowCaptureManager.swift; sourceTree = "<group>"; };
+		19FDA1082ED66F9100F64E76 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		19FDA1092ED66F9100F64E76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		19FDA10A2ED66F9100F64E76 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.strings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		19FDA10B2ED66F9100F64E76 /* MetalGoose-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MetalGoose-Bridging-Header.h"; sourceTree = "<group>"; };
+		19FDA10C2ED66F9100F64E76 /* MetalGoose.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MetalGoose.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		19FDA0BC2ED66F9100F64E76 /* MetalGoose */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = MetalGoose;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		19FDA0B72ED66F9100F64E76 /* Frameworks */ = {
@@ -45,6 +62,25 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		19FDA0BC2ED66F9100F64E76 /* MetalGoose */ = {
+			isa = PBXGroup;
+			children = (
+				19FDA1012ED66F9100F64E76 /* CaptureSettings.swift */,
+				19FDA1022ED66F9100F64E76 /* ContentView.swift */,
+				19FDA1032ED66F9100F64E76 /* GooseEngine.swift */,
+				19FDA1042ED66F9100F64E76 /* MGHUD.swift */,
+				19FDA1052ED66F9100F64E76 /* MetalGooseApp.swift */,
+				19FDA1062ED66F9100F64E76 /* OverlayWindowManager.swift */,
+				19FDA1072ED66F9100F64E76 /* WindowCaptureManager.swift */,
+				19FDA1082ED66F9100F64E76 /* Shaders.metal */,
+				19FDA1092ED66F9100F64E76 /* Assets.xcassets */,
+				19FDA10A2ED66F9100F64E76 /* Localizable.xcstrings */,
+				19FDA10B2ED66F9100F64E76 /* MetalGoose-Bridging-Header.h */,
+				19FDA10C2ED66F9100F64E76 /* MetalGoose.entitlements */,
+			);
+			path = MetalGoose;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -60,12 +96,7 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				19FDA0BC2ED66F9100F64E76 /* MetalGoose */,
-			);
 			name = MetalGoose;
-			packageProductDependencies = (
-			);
 			productName = MetalGoose;
 			productReference = 19FDA0BA2ED66F9100F64E76 /* MetalGoose.app */;
 			productType = "com.apple.product-type.application";
@@ -77,7 +108,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1640;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					19FDA0B92ED66F9100F64E76 = {
@@ -86,6 +117,7 @@
 				};
 			};
 			buildConfigurationList = 19FDA0B52ED66F9100F64E76 /* Build configuration list for PBXProject "MetalGoose" */;
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -94,8 +126,6 @@
 				hu,
 			);
 			mainGroup = 19FDA0B12ED66F9100F64E76;
-			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 55;
 			productRefGroup = 19FDA0BB2ED66F9100F64E76 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -110,6 +140,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19FDA0092ED66F9100F64E76 /* Assets.xcassets in Resources */,
+				19FDA00A2ED66F9100F64E76 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +152,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19FDA0012ED66F9100F64E76 /* CaptureSettings.swift in Sources */,
+				19FDA0022ED66F9100F64E76 /* ContentView.swift in Sources */,
+				19FDA0032ED66F9100F64E76 /* GooseEngine.swift in Sources */,
+				19FDA0042ED66F9100F64E76 /* MGHUD.swift in Sources */,
+				19FDA0052ED66F9100F64E76 /* MetalGooseApp.swift in Sources */,
+				19FDA0062ED66F9100F64E76 /* OverlayWindowManager.swift in Sources */,
+				19FDA0072ED66F9100F64E76 /* WindowCaptureManager.swift in Sources */,
+				19FDA0082ED66F9100F64E76 /* Shaders.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
